@@ -58,6 +58,8 @@ app.add_middleware(
 
 
 @app.get("/", tags=["Health"])
+@app.get("/api", tags=["Health"], include_in_schema=False)
+@app.get("/api/index.py", tags=["Health"], include_in_schema=False)
 async def root():
     """API health check endpoint."""
     return {
@@ -70,6 +72,7 @@ async def root():
 
 
 @app.get("/health", tags=["Health"])
+@app.get("/api/health", tags=["Health"], include_in_schema=False)
 async def health_check():
     """Detailed health check."""
     return {
@@ -77,6 +80,23 @@ async def health_check():
         "service": "AI-Powered Website Link Analysis API",
         "llm": "Google Gemini 2.5 Flash",
         "version": "1.0.0"
+    }
+
+
+@app.get("/link-analysis", tags=["Analysis"])
+@app.get("/link-analysis/", tags=["Analysis"], include_in_schema=False)
+@app.get("/api/link-analysis", tags=["Analysis"], include_in_schema=False)
+async def link_analysis_info():
+    """Information endpoint for GET requests to /link-analysis."""
+    return {
+        "message": "The /link-analysis endpoint requires a POST request with a JSON body.",
+        "usage": {
+            "method": "POST",
+            "url": "https://ai-link-analysis-api.vercel.app/link-analysis",
+            "headers": {"Content-Type": "application/json"},
+            "body": {"url": "https://example.com"}
+        },
+        "docs": "/docs"
     }
 
 
@@ -93,6 +113,16 @@ async def health_check():
     - Top 5 identified services
     - Target audience identification
     """,
+)
+@app.post(
+    "/link-analysis/",
+    response_model=LinkAnalysisResponse,
+    include_in_schema=False,
+)
+@app.post(
+    "/api/link-analysis",
+    response_model=LinkAnalysisResponse,
+    include_in_schema=False,
 )
 async def analyze_link(request: LinkAnalysisRequest) -> LinkAnalysisResponse:
     """
