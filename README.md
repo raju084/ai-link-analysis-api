@@ -8,9 +8,9 @@ A production-ready FastAPI application that analyzes any website URL using Googl
 
 | Resource | URL |
 |---|---|
-| Live API | `https://your-domain.com` |
-| API Endpoint | `https://your-domain.com/link-analysis` |
-| API Documentation | `https://your-domain.com/docs` |
+| Live API | `https://ai-link-analysis-api.vercel.app` |
+| API Endpoint | `https://ai-link-analysis-api.vercel.app/link-analysis` |
+| API Documentation | `https://ai-link-analysis-api.vercel.app/docs` |
 
 ---
 
