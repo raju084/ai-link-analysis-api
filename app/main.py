@@ -83,15 +83,6 @@ async def health_check():
     }
 
 
-@app.api_route("/debug-headers", methods=["GET", "POST"], include_in_schema=False)
-async def debug_headers(request: Request):
-    return {
-        "url_path": request.url.path,
-        "scope_path": request.scope.get("path"),
-        "headers": dict(request.headers),
-    }
-
-
 @app.get("/link-analysis", tags=["Analysis"])
 @app.get("/link-analysis/", tags=["Analysis"], include_in_schema=False)
 @app.get("/api/link-analysis", tags=["Analysis"], include_in_schema=False)
