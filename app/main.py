@@ -124,6 +124,16 @@ async def link_analysis_info():
     response_model=LinkAnalysisResponse,
     include_in_schema=False,
 )
+@app.post(
+    "/",
+    response_model=LinkAnalysisResponse,
+    include_in_schema=False,
+)
+@app.post(
+    "/api/index.py",
+    response_model=LinkAnalysisResponse,
+    include_in_schema=False,
+)
 async def analyze_link(request: LinkAnalysisRequest) -> LinkAnalysisResponse:
     """
     Analyze a website URL and return structured business intelligence.
