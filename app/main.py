@@ -1,5 +1,5 @@
 import logging
-from fastapi import FastAPI, HTTPException
+from fastapi import FastAPI, HTTPException, Request
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse
 from contextlib import asynccontextmanager
@@ -80,6 +80,15 @@ async def health_check():
         "service": "AI-Powered Website Link Analysis API",
         "llm": "Google Gemini 2.5 Flash",
         "version": "1.0.0"
+    }
+
+
+@app.api_route("/debug-headers", methods=["GET", "POST"], include_in_schema=False)
+async def debug_headers(request: Request):
+    return {
+        "url_path": request.url.path,
+        "scope_path": request.scope.get("path"),
+        "headers": dict(request.headers),
     }
 
 
