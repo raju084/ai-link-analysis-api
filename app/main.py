@@ -60,16 +60,14 @@ app.add_middleware(
 @app.get("/", tags=["Health"])
 @app.get("/api", tags=["Health"], include_in_schema=False)
 @app.get("/api/index.py", tags=["Health"], include_in_schema=False)
-async def root(request: Request):
+async def root():
     """API health check endpoint."""
     return {
         "status": "healthy",
         "service": "AI-Powered Website Link Analysis API",
         "version": "1.0.0",
         "docs": "/docs",
-        "endpoint": "POST /link-analysis",
-        "debug_raw_scope_path": request.scope.get("path"),
-        "debug_all_headers": dict(request.headers)
+        "endpoint": "POST /link-analysis"
     }
 
 
